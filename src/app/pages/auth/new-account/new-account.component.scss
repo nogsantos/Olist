@@ -1,0 +1,60 @@
+@import '../../../../assets/styles/components/variables';
+@media #{$large-and-up}{
+    .card {
+        width: 50% !important;
+    }
+}
+
+@media #{$medium-and-down}{
+    .card {
+        width: 100% !important;
+    }
+}
+
+.levels {
+    margin: 8px 0 8px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.level {
+    width: 30% !important;
+    height: 10px;
+    border-radius: 3px;
+    margin-bottom: 4px;
+    &:before {
+        content: '';
+        width: 0;
+        height: 100%;
+        border-radius: 3px;
+        display: table;
+        transition: 200ms;
+    }
+    $p: 'lighten-2';
+    &.stand {
+        background-color: color("grey", $p) !important;
+    }
+    &.success {
+        background-color: color("green", $p) !important;
+    }
+    &.warn {
+        background-color: color("yellow", $p) !important;
+    }
+    &.error {
+        background-color: color("red", $p) !important;
+    }
+}
+
+.row {
+    margin-bottom: 1rem;
+    .col {
+        .progress {
+            width: 100%;
+            .progress-bar {
+                width: 100%;
+                height: 1rem;
+                padding: 0 3.5rem 0 5.3rem;
+            }
+        }
+    }
+}

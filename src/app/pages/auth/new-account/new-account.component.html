@@ -1,0 +1,71 @@
+<form [formGroup]="singUp" autocomplete="off">
+    <div class="d-flex justify-content-md-center">
+        <div class="card">
+            <div class="m-1">
+                <div class="card-body">
+                    <div class="flex-row m-5 text-center"> ​
+                        <picture>
+                            <source srcset="./assets/img/marca.svg" type="image/svg+xml">
+                            <img src="./assets/img/marca.svg" class="img-fluid" alt="Olist" width="100">
+                        </picture>
+                        <h4 class="form-signin-heading m-3">Crie sua conta</h4>
+                    </div>
+                    <div class="flex-row">
+                        <div class="form-group">
+                            <label for="name">Nome completo
+                                <small>*</small>
+                            </label>
+                            <input type="text" formControlName="name" id="name" class="form-control {{singUp.controls.name.dirty ? formErrors.name ? 'is-invalid' : 'is-valid' : ''}}" autofocus>
+                            <div align="start" *ngIf="singUp.controls.name.dirty&&formErrors.name" class="form__error">{{ formErrors.name }}</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">E-mail
+                                <small>*</small>
+                            </label>
+                            <input type="email" formControlName="email" id="email" class="form-control {{singUp.controls.email.dirty ? formErrors.email ? 'is-invalid' : 'is-valid' : ''}}">
+                            <div align="start" *ngIf="singUp.controls.email.dirty&&formErrors.email" class="form__error">{{ formErrors.email }}</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Senha
+                                <small>*</small>
+                            </label>
+                            <input type="password" formControlName="password" id="password" class="form-control {{ singUp.controls.password.dirty ? !(validate.minlength && this.validate.hasUpper && this.validate.hasNumber) ? 'is-invalid' : 'is-valid' : ''}}">
+                            <div class="password-strength">
+                                <div class="flex-row levels">
+                                    <div class="level {{setLevel.one}}" id="level_one">&nbsp;</div>
+                                    <div class="level {{setLevel.two}}" id="level_two">&nbsp;</div>
+                                    <div class="level {{setLevel.three}}" id="level_three">&nbsp;</div>
+                                </div>
+                                <div class="flex-row">
+                                    <ul class="list-group">
+                                        <li class="list-group-item minlength {{addStyleToList(singUp.controls.password.dirty, validate.minlength)}} text-darken-2">
+                                            <img src="./assets/img/circle_{{addImageToList(singUp.controls.password.dirty, validate.minlength)}}.svg" id="img_length" class="img-fluid float-right">Pelo menos 6 caracteres
+                                        </li>
+                                        <li class="list-group-item hasUpper {{addStyleToList(singUp.controls.password.dirty, validate.hasUpper)}} text-darken-2">
+                                            <img src="./assets/img/circle_{{addImageToList(singUp.controls.password.dirty, validate.hasUpper)}}.svg" id="img_upper" class="img-fluid float-right">Pelo menos 1 letra mai&uacute;scula
+                                        </li>
+                                        <li class="list-group-item hasNumber {{addStyleToList(singUp.controls.password.dirty, validate.hasNumber)}} text-darken-2">
+                                            <img src="./assets/img/circle_{{addImageToList(singUp.controls.password.dirty, validate.hasNumber)}}.svg" id="img_number" class="img-fluid float-right">Pelo menos 1 n&uacute;mero
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password_confirm">Confirme sua senha
+                                <small>*</small>
+                            </label>
+                            <input type="password" formControlName="password_confirmation" id="password_confirm" class="form-control {{ singUp.controls.password_confirmation.dirty ? singUp.errors&&singUp.errors.mismatch ? 'is-invalid' : 'is-valid' : ''}}">
+                            <div class="form__error" *ngIf="singUp.controls.password_confirmation.dirty&&singUp.errors&&singUp.errors.mismatch">As senhas informadas n&atilde;o s&atilde;o iguais</div>
+                        </div>
+                    </div>
+                    <div class="flex-row">
+                        <button class="btn btn-lg {{singUp.invalid||(level<3) ? 'grey lighten-1' : 'btn-success'}} btn-block" [disabled]="singUp.invalid||(level<3)" (click)="send()">
+                            <img class="img-fluid float-right" *ngIf="loading" src="./assets/img/ajax-loader.gif">Criar conta
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
